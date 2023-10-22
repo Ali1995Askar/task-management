@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Signup {% endblock %}
+{% block sidebar %} {% endblock %}
+{% block content %}
+    <main>
+        <div class="container">
+            <section
+                    class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4" style="margin-top: 15%;">
+                                <a href='#'>
+                                    <img src="{% static 'img/logo.png' %}" alt="" style="height: 50px; width: 75px;">
+                                </a>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                        <br>
+                                    </div>
+
+                                    <form method="post" class="row g-3 needs-validation">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="email" class="form-label"> Username</label>
+                                            {{ form.username }}
+                                            <small class="form-text text-muted "> {{ form.username.errors }}</small>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="name" class="form-label">First Name</label>
+                                            {{ form.first_name }}
+                                            <small class="form-text text-muted "> {{ form.first_name.errors }}</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="name" class="form-label">Last Name</label>
+                                            {{ form.first_name }}
+                                            <small class="form-text text-muted "> {{ form.last_name.errors }}</small>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="email" class="form-label"> Email</label>
+                                            {{ form.email }}
+                                            <small class="form-text text-muted "> {{ form.email.errors }}</small>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="Password1" class="form-label">Password</label>
+                                            {{ form.password1 }}
+                                            <div class="invalid-feedback">Please enter your password!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="Password2" class="form-label">Re-Password</label>
+                                            {{ form.password2 }}
+                                        </div>
+                                        <small class="form-text text-muted "> {{ form.password2.errors }}</small>
+
+                                        <div class="col-12"><br></div>
+
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">Already have an account?
+                                                <a href={% url 'users:signin' %}>signin</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock content %}
+
+
+
+
+

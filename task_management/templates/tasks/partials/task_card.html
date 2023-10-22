@@ -1,0 +1,36 @@
+<div class="card info-card">
+    <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-browser-safari"></i>
+            </div>
+            <div class="ps-3">
+                <span class="text-muted small pt-2 ps-1">Due Date:</span>
+                {% if task.status == 'TODO' %}
+                    <span class="text-primary small pt-1 fw-bold">{{ task.due_date }}</span>
+                    &nbsp;
+                    &nbsp;
+                    <span class="badge bg-primary">{{ task.status }}</span>
+                {% elif task.status == 'IN_PROGRESS' %}
+                    <span class="text-danger small pt-1 fw-bold">{{ task.due_date }}</span>
+                    &nbsp;
+                    &nbsp;
+                    <span class="badge bg-danger">{{ task.status }}</span>
+                {% else %}
+                    <span class="text-success small pt-1 fw-bold">{{ task.due_date }}</span>
+                    &nbsp;
+                    &nbsp;
+                    <span class="badge bg-success">{{ task.status }}</span>
+                {% endif %}
+
+                <div style="--bs-breadcrumb-divider: '->';">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">{{ task.created_by }}</li>
+                        <li class="breadcrumb-item">{{ task.assigned_to }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

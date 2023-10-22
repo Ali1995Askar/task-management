@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %} Delete Task {% endblock %}
+{% block content %}
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">My-Task</a></li>
+                    <li class="breadcrumb-item active">Delete</li>
+                    <li class="breadcrumb-item active">{{ task.id }}</li>
+                </ol>
+            </nav>
+        </div>
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-trash-fill"></i> Delete Task</h5>
+                            <p>Are you sure you want to delete {{ task.title }}</p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" data-bs-toggle="modal"
+                                       data-bs-target="#basicModal" value="Delete Task"/>
+                                <a href="{% url 'tasks:details' task.pk %}"
+                                   class="btn btn-primary">
+                                    Back to Details
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}

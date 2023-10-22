@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %} My Task {% endblock %}
+
+{% block content %}
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>My Tasks</h1>
+            <nav>
+                <ol class=" breadcrumb ">
+                    <li class="breadcrumb-item"></li>
+                    <li class="breadcrumb-item active"><a href={% url 'tasks:list' %}>My Tasks</a></li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6  mb-3">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Today Is: {% now "N j, Y" %}.
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <input id="searchId" type="text" class="form-control" name="search" placeholder="search">
+                </div>
+                <div class="col-md-4">
+
+                    <select id='filterId' name="filter" class="form-select" aria-label="Default select example">
+                        <option value="">All Status</option>
+                        <option value="TODO">To Do</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="DONE">Done</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+
+                    <button id="searchBtnId" type="submit" class="form-control btn btn-primary rounded-pill mb-3">
+                        <i class="bi bi-search"> Search & Filter </i>
+                    </button>
+                </div>
+            </form><!-- End Multi Columns Form -->
+        </div>
+
+        <div class="row">
+            <div class="col-xxl-4 col-md-4">
+                {% for task in todo_tasks %}
+                    <a href={% url 'tasks:details' task.pk %}>
+                        {% include 'tasks/partials/task_card.html' %}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="col-xxl-4 col-md-4">
+                {% for task in in_progress_tasks %}
+                    <a href={% url 'tasks:details' task.pk %}>
+                        {% include 'tasks/partials/task_card.html' %}
+
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="col-xxl-4 col-md-4">
+                {% for task in done_tasks %}
+                    <a href={% url 'tasks:details' task.pk %}>
+                        {% include 'tasks/partials/task_card.html' %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </main><!-- End #main -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentURL = window.location.href;
+            var url = new URL(currentURL);
+            var filterValue = url.searchParams.get("filter");
+            var searchValue = url.searchParams.get("search");
+
+            var filterSelect = document.getElementById("filterId");
+            var searchInput = document.getElementById("searchId");
+
+            filterSelect.value = filterValue;
+            searchInput.value = searchValue;
+
+
+            searchInput.addEventListener("input", updateURL);
+            filterSelect.addEventListener("change", updateURL);
+
+            function updateURL() {
+                var filterValue = filterSelect.value;
+                var searchValue = searchInput.value;
+
+                var baseURL = "{% url 'tasks:list' %}?";
+                var queryParams = [];
+
+                if (searchValue.trim() !== "") {
+                    queryParams.push("search=" + searchValue);
+                }
+                if (filterValue) {
+                    queryParams.push("filter=" + filterValue);
+                }
+
+
+                var newURL = baseURL + queryParams.join("&");
+                console.log(newURL)
+                window.history.pushState(null, "", newURL);
+            }
+        });
+    </script>
+{% endblock content %}
