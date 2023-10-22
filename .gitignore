@@ -1,0 +1,12 @@
+.idea
+*__pycache__*
+*/__pycache__
+*.pytest_cache*
+*pytest_cache*
+*htmlcov*
+coverage*
+.coverage
+docker/mysql/persist/*
+*.DS_Store
+*db.sqlite3
+.env
