@@ -4,7 +4,7 @@
 1- Install all requirements using 'pip install -r requirements.txt'<br />
 2- Add .env file next to .env.example file with same parameters you can copy the env.example (WORKING_SETTINGS) variable use 'LOCAL' to run it locally and 'DOCKER' to run it with docker <br />
 3- Cd to root folder (to manage.py) then run migrate command 'python manage.py migrate' <br />
-4- Run tests using 'python manage.py test' to test (or for each app (add the app name after the command)0<br /> <br />
+4- Run tests using 'python manage.py test' to test or for each app (add the app name after run tests command)<br /> <br />
 
 **Steps to run with docker and docker-compose:** <br />
 1- make sure you have docker and docker compose on your system<br />
